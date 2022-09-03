@@ -1,6 +1,6 @@
 const PublishButton = (props) => {
   return (
-    <button className={`publish-button`} onClick={props.onClick} style={props.style}>
+    <button className={props.disabled ? `publish-button-disabled` : `publish-button`} onClick={props.disabled ? () => {} : props.onClick} style={props.style}>
       {props.children}
     </button>
   );

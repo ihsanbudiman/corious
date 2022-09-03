@@ -27,7 +27,7 @@ const HeaderWriteStory = (props) => {
             </Nav.Item> */}
         </Nav>
         <Fragment>
-          <PublishButton style={{ marginRight: `0.75rem` }}>Publish</PublishButton>
+          {props.button}
           {/* make a profile image */}
           <NavDropdown
             align="end"

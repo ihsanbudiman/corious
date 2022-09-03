@@ -519,7 +519,7 @@
 }
 
 /* publish-button on hover */
-.publish-button:hover {
+.publish-button:hover{
   cursor: pointer;
   background-color: rgba(var(--accent-brand-rgb));
   color: white;
@@ -535,6 +535,21 @@
   color: white;
 }
 
+/* make disabled style */
+.publish-button-disabled {
+    /* make a rounded */
+  border-radius: 0.5rem;
+  background-color: rgba(var(--accent-brand-rgb), 0.1);
+  color: rgba(var(--accent-brand-rgb), 0.5);
+  font-size: 1rem;
+  font-weight: 400;
+  padding: 0.25rem 1rem;
+
+  border: 0px;
+  cursor: not-allowed !important;
+}
+
+
 
 /* Custom Button Style END   */
 /* ===================================================== */
@@ -543,4 +558,20 @@
 /* Custom dropdown toggler arrow (di hidden actually) */
 .dropdown-toggle::after {
   display: none !important; 
+}
+.moduleItemIntrotext {
+  overflow: hidden;
+  position: relative;
+}
+.moduleItemIntrotext img {
+  position: relative;
+  margin: -50% auto;/* virtualy height needed turn don to zero */
+  width: 100%;
+  height:auto;
+}
+.moduleItemImage {
+  display:block;
+  height:400px;
+  line-height:400px;
+  overflow:hidden;
 }
