@@ -22,18 +22,17 @@ import { Container } from "react-bootstrap";
 import CreatableSelect from "react-select/creatable";
 import { ActionMeta, OnChangeValue } from "react-select";
 import { route } from "preact-router";
-
-const DEFAULT_INITIAL_DATA = () => {
-  return {};
-};
+import { useRecoilState } from "recoil";
+import { newStoryTemp } from "./atom";
 
 const EDITTOR_HOLDER_ID = "editorjs";
 
 const WriteStory = () => {
   const ejInstance = useRef();
-  const [editorData, setEditorData] = useState({});
+  // const [editorData, setEditorData] = useState({});
   const [show, setShow] = useState(false);
   const [disabled, setDisabled] = useState(true);
+  const [editorData, setEditorData] = useRecoilState(newStoryTemp);
 
   // This will run only once
   useEffect(() => {
@@ -50,6 +49,7 @@ const WriteStory = () => {
   }, []);
 
   useEffect(() => {
+    handleShow(false);
     disableHandler();
   }, [editorData]);
 
@@ -180,8 +180,8 @@ const WriteStory = () => {
     // ejInstance.current = editor;
   };
 
-  async function handleShow() {
-    setShow(true);
+  async function handleShow(bool) {
+    setShow(bool);
   }
 
   const handleChange = (newValue, actionMeta) => {
@@ -196,7 +196,7 @@ const WriteStory = () => {
       <Layout>
         <HeaderWriteStory
           button={
-            <PublishButton disabled={disabled} onClick={() => handleShow()} style={{ marginRight: `0.75rem` }}>
+            <PublishButton disabled={disabled} onClick={() => handleShow(true)} style={{ marginRight: `0.75rem` }}>
               Publish
             </PublishButton>
           }
@@ -209,13 +209,28 @@ const WriteStory = () => {
         <Modal show={show} fullscreen={true} onHide={() => setShow(false)}>
           <Container>
             <Modal.Header closeButton></Modal.Header>
-            <Modal.Body className="h-100">
-              <div className="row">
-                <div className="col-12 col-lg-6">adsf</div>
-                <div className="col-12 col-lg-6">
-                  <div className="">
-                    <span className="d-block">Pick Topic</span>
-                    <CreatableSelect isMulti onChange={handleChange} onInputChange={(e) => {}}></CreatableSelect>
+            <Modal.Body className="h-100" style={{ minHeight: `60vh` }}>
+              <div className="row d-flex align-items-center" style={{ height: `100%` }}>
+                <div className="col-12 row">
+                  <div className="col-12 col-lg-6">
+                    {/* <div className="d-block mb-4" style={{ fontWeight: `bold` }}>
+                      Story Preview
+                    </div>
+                    <div className="story-preview-img-wrapper">
+                      <div className="story-preview-img-content"></div>
+                    </div> */}
+                  </div>
+                  <div className="col-12 col-lg-6">
+                    <div className="">
+                      <span className="d-block mb-4">
+                        Publishing to: <span style={{ fontWeight: `bold` }}>Moh Ihsan Budiman</span>
+                      </span>
+                      <span className="d-block mb-2">Add a Topic for your story (up to 5), so people with interested in your topic could see your story</span>
+                      <CreatableSelect isMulti onChange={handleChange} onInputChange={(e) => {}}></CreatableSelect>
+                      <div className="d-flex justify-content-end">
+                        <button className="mt-3 button">Publish Story</button>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
